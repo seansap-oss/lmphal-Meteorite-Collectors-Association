@@ -1,5 +1,4 @@
 import Navigation from './components/Navigation'
-import NewsTicker from './components/NewsTicker'
 import HeroTray from './components/HeroTray'
 import LatestDiscoveries from './components/LatestDiscoveries'
 import ClassificationExplorer from './components/ClassificationExplorer'
@@ -8,13 +7,18 @@ import ResearchSection from './components/ResearchSection'
 import GroupSyncBanner from './components/GroupSyncBanner'
 import Footer from './components/Footer'
 
+/**
+ * App — Main layout.
+ * Header is fixed (nav + ticker). Main content has pt-24 to clear it.
+ */
 export default function App() {
   return (
     <div className="min-h-screen bg-alabaster">
-      <NewsTicker />
+      {/* Fixed header with nav + ticker lives here */}
       <Navigation />
 
-      <main>
+      {/* Push content below the fixed header (nav 64px + ticker 32px = 96px) */}
+      <main className="pt-24">
         {/* Hero — Featured specimen + event sidebar + interactive tray */}
         <div id="discovery">
           <HeroTray />

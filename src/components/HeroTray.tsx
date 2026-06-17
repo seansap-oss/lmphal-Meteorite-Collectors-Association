@@ -86,7 +86,7 @@ export default function HeroTray() {
       </div>
 
       {/* ── Top Editorial Section: Featured + Sidebar ── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-28 lg:pt-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-10 lg:pt-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left — Featured Specimen (Editorial Style) */}
           <div className="lg:col-span-7">
@@ -235,10 +235,15 @@ export default function HeroTray() {
       </div>
 
       {/* ── Interactive Tray Section ── */}
-      <div className="relative z-10 mt-16 lg:mt-20">
-        {/* Section divider */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-6">
-          <div className="flex items-center gap-3">
+      <div className="relative z-10 mt-20 lg:mt-28">
+        {/* Refined section divider */}
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-8">
+          <div className="relative">
+            {/* Double-line divider for editorial feel */}
+            <div className="h-px bg-border-subtle" />
+            <div className="h-px bg-border-subtle mt-px opacity-40" />
+          </div>
+          <div className="flex items-center gap-3 mt-5">
             <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-meteor-bronze">
               The Collection
             </span>
@@ -313,7 +318,7 @@ export default function HeroTray() {
       </div>
 
       {/* Bottom spacer */}
-      <div className="h-16" />
+      <div className="h-20" />
     </section>
   )
 }

@@ -28,11 +28,11 @@ export default function Navigation() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         scrolled
-          ? 'bg-alabaster/90 backdrop-blur-xl border-b border-border-subtle shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
-          : 'bg-transparent'
+          ? 'bg-alabaster/95 backdrop-blur-xl border-b border-border-subtle shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+          : 'bg-alabaster'
       )}
     >
-      <nav className="mx-auto max-w-7xl px-6 lg:px-10 flex items-center justify-between h-18">
+      <nav className="mx-auto max-w-7xl px-6 lg:px-10 flex items-center justify-between h-16">
         {/* Logo / Wordmark */}
         <a href="#" className="flex items-center gap-3 group">
           <div className="w-8 h-8 rounded-full bg-obsidian flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -93,6 +93,9 @@ export default function Navigation() {
         </button>
       </nav>
 
+      {/* ── Ticker Bar (part of fixed header) ── */}
+      <TickerBar />
+
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -129,5 +132,50 @@ export default function Navigation() {
         )}
       </AnimatePresence>
     </motion.header>
+  )
+}
+
+/* ── Inline Ticker Bar (renders inside the fixed header) ── */
+const tickerUpdates = [
+  'New observed fall: Sikhote-Alin fragment recovered in Primorsky Krai',
+  'Community milestone: 14,200+ verified specimens catalogued',
+  'Research paper published: Pallasite formation in tropical climates',
+  'Monthly meetup: Classification workshop — June 28, 2026',
+  'New strewn field discovered in Nagaland, India — under investigation',
+  'Video program update: 47 new allsky camera stations deployed',
+]
+
+function TickerBar() {
+  return (
+    <div className="bg-obsidian overflow-hidden border-t border-white/5">
+      <div className="mx-auto max-w-7xl flex items-center h-8">
+        {/* Live indicator */}
+        <div className="flex-shrink-0 flex items-center gap-2 px-4 lg:px-5 border-r border-white/10 h-full">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+          </span>
+          <span className="text-[9px] font-semibold tracking-[0.2em] uppercase text-white/80">
+            Live
+          </span>
+        </div>
+
+        {/* Scrolling ticker */}
+        <div className="flex-1 overflow-hidden relative">
+          <motion.div
+            className="flex items-center whitespace-nowrap"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ x: { duration: 40, repeat: Infinity, ease: 'linear' } }}
+          >
+            {[...tickerUpdates, ...tickerUpdates].map((update, i) => (
+              <span key={i} className="flex items-center">
+                <span className="text-[11px] text-white/60 px-5">{update}</span>
+                <span className="text-meteor-bronze/60 text-[6px]">&#9679;</span>
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </div>
   )
 }
