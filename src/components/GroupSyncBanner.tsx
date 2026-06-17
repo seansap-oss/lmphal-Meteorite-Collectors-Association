@@ -3,13 +3,8 @@ import { motion, useInView } from 'framer-motion'
 import { communityStats } from '../data/meteorites'
 
 /**
- * GroupSyncBanner — Ties the website back to the Facebook community.
- *
- * Features:
- * - Animated counter stats (count up on viewport enter)
- * - Sleek, minimal design consistent with the editorial theme
- * - Live pulse indicators for active metrics
- * - CTA to join the Facebook group
+ * GroupSyncBanner — Community hub with animated stats.
+ * Elevated with AMS-inspired data presentation and editorial polish.
  */
 
 function AnimatedCounter({ target, duration = 2 }: { target: number; duration?: number }) {
@@ -19,19 +14,14 @@ function AnimatedCounter({ target, duration = 2 }: { target: number; duration?: 
 
   useEffect(() => {
     if (!inView) return
-    let start = 0
     const startTime = performance.now()
-
     const tick = (now: number) => {
       const elapsed = (now - startTime) / 1000
       const progress = Math.min(elapsed / duration, 1)
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
-      start = Math.round(eased * target)
-      setCount(start)
+      setCount(Math.round(eased * target))
       if (progress < 1) requestAnimationFrame(tick)
     }
-
     requestAnimationFrame(tick)
   }, [inView, target, duration])
 
@@ -89,10 +79,7 @@ const stats = [
 export default function GroupSyncBanner() {
   return (
     <section id="community" className="relative py-24 lg:py-32 bg-obsidian overflow-hidden">
-      {/* Subtle noise texture */}
       <div className="absolute inset-0 noise-overlay opacity-50" />
-
-      {/* Decorative gradient orbs */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-meteor-bronze/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-meteor-bronze/3 rounded-full blur-3xl" />
 
@@ -118,7 +105,7 @@ export default function GroupSyncBanner() {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -126,30 +113,22 @@ export default function GroupSyncBanner() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="relative group"
             >
-              <div className="p-6 lg:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/8 hover:border-white/15 transition-all duration-500">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="p-5 lg:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/8 hover:border-white/15 transition-all duration-500 text-center">
+                <div className="flex items-center justify-center gap-2 mb-3">
                   <div className="text-meteor-bronze-light">{stat.icon}</div>
-                  {/* Live pulse indicator */}
                   {!stat.isYear && (
-                    <span className="relative flex h-2 w-2">
+                    <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                     </span>
                   )}
                 </div>
-                <div className="font-display text-3xl lg:text-4xl font-bold text-white">
-                  {stat.isYear ? (
-                    stat.value
-                  ) : (
-                    <AnimatedCounter target={stat.value} />
-                  )}
-                  <span className="text-meteor-bronze-light text-xl">{stat.suffix}</span>
+                <div className="font-display text-2xl lg:text-3xl font-bold text-white">
+                  {stat.isYear ? stat.value : <AnimatedCounter target={stat.value} />}
+                  <span className="text-meteor-bronze-light text-lg">{stat.suffix}</span>
                 </div>
-                <p className="text-sm text-slate-light mt-2 tracking-wide">
-                  {stat.label}
-                </p>
+                <p className="text-xs text-slate-light mt-1.5 tracking-wide">{stat.label}</p>
               </div>
             </motion.div>
           ))}

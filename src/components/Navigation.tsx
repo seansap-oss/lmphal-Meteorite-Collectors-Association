@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '../lib/utils'
 
 const navLinks = [
-  { label: 'Exhibition', href: '#exhibition' },
+  { label: 'Discovery', href: '#discovery' },
   { label: 'Specimens', href: '#specimens' },
-  { label: 'Community', href: '#community' },
+  { label: 'Classification', href: '#classification' },
   { label: 'Research', href: '#research' },
+  { label: 'Community', href: '#community' },
 ]
 
 export default function Navigation() {
@@ -65,9 +66,9 @@ export default function Navigation() {
           ))}
           <a
             href="#community"
-            className="ml-4 px-5 py-2 text-sm font-medium bg-obsidian text-white rounded-full hover:bg-meteor-bronze transition-colors duration-300"
+            className="ml-2 px-5 py-2 text-xs font-semibold tracking-wider uppercase bg-obsidian text-white rounded-full hover:bg-meteor-bronze transition-colors duration-300"
           >
-            Join Us
+            Report a Find
           </a>
         </div>
 
@@ -116,6 +117,13 @@ export default function Navigation() {
                   {link.label}
                 </motion.a>
               ))}
+              <a
+                href="#community"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 px-5 py-3 text-xs font-semibold tracking-wider uppercase bg-obsidian text-white rounded-full text-center"
+              >
+                Report a Find
+              </a>
             </div>
           </motion.div>
         )}

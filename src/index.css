@@ -5,7 +5,6 @@
 
 /* ─── Custom Theme Tokens ─── */
 @theme {
-  /* Brand palette */
   --color-alabaster: #F8F9FA;
   --color-ivory: #F4F4F6;
   --color-obsidian: #111111;
@@ -18,11 +17,9 @@
   --color-border-subtle: #E5E5E5;
   --color-border-medium: #D1D5DB;
 
-  /* Typography */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'DM Sans', 'Inter', system-ui, sans-serif;
 
-  /* Custom spacing */
   --spacing-18: 4.5rem;
   --spacing-88: 22rem;
   --spacing-128: 32rem;
@@ -56,79 +53,38 @@ body {
   color: white;
 }
 
-/* ─── Scrollbar Styling ─── */
-::-webkit-scrollbar {
-  width: 6px;
-}
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-ivory); }
+::-webkit-scrollbar-thumb { background: var(--color-border-medium); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-slate-muted); }
 
-::-webkit-scrollbar-track {
-  background: var(--color-ivory);
-}
+/* ─── Utilities ─── */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-border-medium);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-slate-muted);
-}
-
-/* ─── Custom Utility Classes ─── */
-.font-display {
-  font-family: var(--font-display);
-}
-
-.font-body {
-  font-family: var(--font-body);
-}
-
-/* Tray horizontal scroll - hide scrollbar */
-.tray-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.tray-scroll::-webkit-scrollbar {
-  display: none;
-}
+/* Tray scrollbar hidden */
+.tray-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.tray-scroll::-webkit-scrollbar { display: none; }
 
 /* Masonry grid */
-.masonry-grid {
-  columns: 3;
-  column-gap: 1.5rem;
-}
+.masonry-grid { columns: 3; column-gap: 1.5rem; }
+@media (max-width: 1024px) { .masonry-grid { columns: 2; } }
+@media (max-width: 640px) { .masonry-grid { columns: 1; } }
+.masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
 
-@media (max-width: 1024px) {
-  .masonry-grid {
-    columns: 2;
-  }
-}
-
-@media (max-width: 640px) {
-  .masonry-grid {
-    columns: 1;
-  }
-}
-
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 1.5rem;
-}
-
-/* Specimen card hover lift */
+/* Specimen card hover */
 .specimen-card {
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
               box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
-
 .specimen-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.12),
               0 8px 20px -8px rgba(0, 0, 0, 0.08);
 }
 
-/* Gradient text utility */
+/* Gradient text */
 .text-gradient {
   background: linear-gradient(135deg, var(--color-obsidian) 0%, var(--color-meteor-bronze) 100%);
   -webkit-background-clip: text;
@@ -136,7 +92,7 @@ body {
   background-clip: text;
 }
 
-/* Noise texture overlay */
+/* Noise overlay */
 .noise-overlay::after {
   content: '';
   position: absolute;
@@ -147,7 +103,7 @@ body {
   z-index: 1;
 }
 
-/* Widmanstatten pattern (iron meteorite hover effect) */
+/* Widmanstatten pattern */
 .widmanstatten-overlay {
   background:
     linear-gradient(45deg, transparent 45%, rgba(140, 122, 107, 0.15) 45%, rgba(140, 122, 107, 0.15) 55%, transparent 55%),
@@ -155,4 +111,10 @@ body {
     linear-gradient(30deg, transparent 48%, rgba(140, 122, 107, 0.08) 48%, rgba(140, 122, 107, 0.08) 52%, transparent 52%),
     linear-gradient(-60deg, transparent 48%, rgba(140, 122, 107, 0.06) 48%, rgba(140, 122, 107, 0.06) 52%, transparent 52%);
   background-size: 40px 40px, 50px 50px, 35px 35px, 45px 45px;
+}
+
+/* Editorial section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border-subtle), transparent);
 }
